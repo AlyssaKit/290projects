@@ -1,0 +1,21 @@
+
+<%- include("commonHeader.ejs", {title:"Studio Ghibli's Movies"}) %>
+<div class="container" style="text-align: center;">
+<% if(indicator == 0) { %>  
+    <h1>All of Studio Ghibli's Movies</h1>         
+<% }else{ %>
+    <h1>Movies Directed by <%- dirName %> </h1>
+<% } %>
+<p>click on a picture to learn more about the movie</p>
+<div class="section row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+<% movies.forEach(function (singleMovies) { %>  
+    <div class="singleMov">
+        <h2><%- singleMovies.title %></h2>
+        <a href="/movies/<%- singleMovies.title %>"><img src="<%- singleMovies.image %>" alt="<%- singleMovies.title %> movie image" width="200"></a> 
+    </div>  
+    <br>              
+<% }) %>
+</div>
+</div>
+</body>
+</html>

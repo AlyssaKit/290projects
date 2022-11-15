@@ -1,0 +1,28 @@
+<%- include("commonHeader.ejs", {title: title}) %>
+<div class="container" style="text-align: center;">
+<h1><%- title %></h1>
+<img src="<%- image %>" alt="<%- title %> movie image" width="200">
+<br>
+<h2>Director</h2>
+<ul class="list-group list-group-flush">
+  <li class="list-group-item"><%- director %></li>
+</ul>
+<br>
+<h2>Producer</h2>
+<ul class="list-group list-group-flush">
+  <li class="list-group-item"><%- producer %></li>
+</ul>
+<br>
+<h2>Description</h2>
+  <p><%- description %></p>
+<br>
+<h2>Release Date</h2>
+  <p><%- release_date %></p>
+<br>
+<h2>Run Time</h2>
+  <p><%- running_time %></p>
+<p><a href="/">Go back to Index</a></p>
+<p><a href="/movies">Go back to All Movies</a></p>
+</div>
+</body>
+</html>

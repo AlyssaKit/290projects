@@ -1,0 +1,38 @@
+<%- include("commonHeader.ejs", {title: cat.name}) %>
+
+<h1><%- cat.name %></h1>
+
+<h2>Full Name</h2>
+<p><%- cat.getFullName %></p>
+
+<h2>Age</h2>
+<p><%- cat.age %></p>
+
+
+<h2>Nicknames</h2>
+<ul>
+    <% for (let nickname of cat.nicknames) { %>
+        <li><%- nickname %></li>
+      <% } %>
+</ul>
+
+<br>
+
+<h2>Siblings</h2>
+
+<ul>
+    <% for (let siblings of cat.siblings) { %>
+        <li><a href=<%- siblings.url %> > <%- siblings.name %></a></li>
+    <% } %>
+</ul>
+<h2>Fur Color</h2>
+<p><%- cat.fur_color %></p>
+<h2>Fur Length</h2>
+<p><%- cat.fur_length %></p>
+
+<ul class="list-unstyled">
+    <li><a href="/Cats/">Home</a></li>
+    <li><a href="/Cats/update/<%= cat._id %>">Update this Cat</a></li>
+</ul>
+</body>
+</html>

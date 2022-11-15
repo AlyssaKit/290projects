@@ -1,0 +1,84 @@
+<%- include("commonHeader.ejs", {title:title}) %>
+
+<form method="POST" action="/cats/update/<%= cat._id %>" id="catForm">
+    <input type="hidden" name="id" value="<%= cat._id %>" >
+
+    <div class="mb-3">
+      <label for="name" class="form-label">Name <em>(Required)</em></label>
+      <input type="text" class="form-control" name="name" id="name"
+        value="<%= cat.name %>" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="age" class="form-label">Age <em>(Required)</em></label>
+      <input type="number" class="form-control" name="age" id="age"
+        value="<%= cat.age %>" required min="0" max="50">
+    </div>
+
+    <div class="mb-3">
+      <label for="nicknames" class="form-label">Nicknames <em>(At least one is required)</em></label>
+      <textarea class="form-control" name="nicknames" id="nicknames" rows="8"
+      aria-describedby="nicknamesHelp"><%= cat.nicknames.join("\n") -%></textarea>
+      <div id="nicknamessHelp" class="form-text">Enter one nickname per line.</div>
+    </div>
+
+        <fieldset class="mb-3 ">
+          <legend>Siblings</legend>
+          <% for(let c of cats) { %>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" name="siblings" value="<%= c._id %>"
+              id="<%= c._id %>" 
+              <% for(let s of cat.siblings) { %>
+              <%= s && s._id.equals(c._id) ? "checked" : "" %>
+              <% } %>
+              >
+              <label for="<%= c._id %>" class="form-check-label"><%= c.name %></label>
+            </div>  
+          <% } %>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" name="sibling" value=""
+            id="cat_none" <%= !cat.siblings ? "checked" : "" %>>
+            <label for="cat_none" class="form-check-label">None</label>
+          </div>
+        </fieldset>
+
+    <div class="mb-3">
+        <label for="fur_length" class="form-label">Fur Length <em>(Required)</em></label>
+        <input type="text" class="form-control" name="fur_length" id="fur_length"
+        value="<%= cat.fur_length %>">
+    </div>
+
+    <div class="mb-3">
+        <label for="fur_color" class="form-label">Fur Color <em>(Required)</em></label>
+        <input type="text" class="form-control" name="fur_color" id="fur_color"
+        value="<%= cat.fur_color %>">
+    </div>
+
+    <button class="btn btn-primary my-3" type="submit">Submit</button>
+    <br>
+    <a href="/cats">Go Back Home</a>
+</form>
+<script>
+    const form = document.getElementById("catForm");
+    let nicknames = document.getElementById("nicknames");
+
+    form.addEventListener("submit", function (event) {
+      if(!validateNicknames())
+        event.preventDefault();  
+    });
+
+    powers.addEventListener('change', validateNicknames); 
+
+    function validateNicknames() {
+      let numNicknames = nicknames.value.split("\n").length;
+      console.log(numNicknames);
+      if ((numNicknames >= 1)&&(numNicknames <= 5)) {
+        nicknames.setCustomValidity("");
+        return true;
+      } else {
+        nicknames.setCustomValidity("Please enter at least one nickname");
+        nicknames.reportValidity();
+        return false;
+      }
+    }
+  </script>

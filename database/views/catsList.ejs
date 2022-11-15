@@ -1,0 +1,11 @@
+<%- include("commonHeader.ejs", {title:"All Cats"}) %>
+
+<h1>All Cats</h1>
+<ul>
+    <% for (let cat of catsList) { %>
+        <li><a href="<%- cat.url %>"><%- cat.name %></a></li>
+    <% } %>
+</ul>
+<a href="/cats/create/">Create a Cat</a>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cookies</title>
+  </head>
+  <body>
+    <p>you have viewed this page times <%- counter %> on this computer</p>
+ 
+  <script>
+    console.log("Raw cookies:", document.cookie);
+    let cookieMap = getCookieDictionary( );
+    console.log("Cookies as map:", cookieMap);
+    countViews();
+ 
+    function getCookieDictionary() {
+      let cookieArray = document.cookie.split('; ');
+      let cookieMap = {};
+      for(let c of cookieArray) {
+        let cParts = c.split("=");
+        if(cParts.length > 1)
+          cookieMap[cParts[0]] = cParts[1];
+      }
+      return cookieMap;
+    }
+ 
+    function countViews() {
+      console.log(cookieMap['counter']);
+      document.cookie = 'counter=' + (parseInt(cookieMap["counter"]) + 1);
+      console.log("Raw cookies:", document.cookie);
+    }
+  </script>
+  </body>
+</html>
